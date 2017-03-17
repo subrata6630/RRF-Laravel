@@ -15,4 +15,4 @@ Route::name('home')->get('/', 'HomeController@viewWelcome');
 
 Route::name('register')->get('/register', 'HomeController@viewRegisterForm');
 
-Route::name('register')->get('/login', 'HomeController@viewLoginForm');
+Route::name('login')->get('/login', 'HomeController@viewLoginForm');

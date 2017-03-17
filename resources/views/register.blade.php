@@ -30,22 +30,22 @@
         <h1>RRF Laravel 101</h1>
         <form action='' method='post' enctype="multipart/form-data">
             <div class="form-group">
-                <label for='number'>Email Address: </label>
+                <label for='email'>Email Address: </label>
                 <input type='text' class='form-control' name='email'>
             </div>
 
             <div class="form-group">
-                <label for='number'>Username: </label>
+                <label for='username'>Username: </label>
                 <input type='text' class='form-control' name='username'>
             </div>
 
             <div class="form-group">
-                <label for='number'>Password: </label>
+                <label for='password'>Password: </label>
                 <input type='password' class='form-control' name='password'>
             </div>
 
             <div class="form-group">
-                <label for='number'>Photo: </label>
+                <label for='photo'>Photo: </label>
                 <input type='file' class='form-control' name='photo'>
             </div>
 
