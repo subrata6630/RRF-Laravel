@@ -28,7 +28,18 @@
 
     <div class="jumbotron">
         <h1>RRF Laravel 101</h1>
-        <form action='' method='post' enctype="multipart/form-data">
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action='{{ route('register') }}' method='post' enctype="multipart/form-data">
             <div class="form-group">
                 <label for='email'>Email Address: </label>
                 <input type='text' class='form-control' name='email'>
@@ -50,6 +61,7 @@
             </div>
 
             <div class="form-group">
+                {!! csrf_field() !!}
                 <button type='submit' class='btn btn-success' name='register'>Register</button>
             </div>
         </form>

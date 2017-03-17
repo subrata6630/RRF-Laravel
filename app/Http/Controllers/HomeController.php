@@ -16,6 +16,23 @@ class HomeController extends Controller
         return view('register');
     }
 
+    public function processRegistration(Request $request)
+    {
+        // data validation
+        $this->validate($request, [
+            'email' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'photo' => 'required',
+        ]);
+
+        // process photo upload
+
+        // insert the data into database
+
+        // registration complete
+    }
+
     public function viewLoginForm()
     {
         return view('login');
