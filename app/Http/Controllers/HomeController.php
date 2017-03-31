@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Exception;
 
 class HomeController extends Controller
 {
@@ -20,17 +22,47 @@ class HomeController extends Controller
     {
         // data validation
         $this->validate($request, [
-            'email' => 'required',
-            'username' => 'required',
-            'password' => 'required',
-            'photo' => 'required',
+            'email' => 'required|email',
+            'username' => 'required|min:6',
+            'password' => 'required|min:6',
+            'photo' => 'required|mimes:jpeg,jpg,bmp,png',
         ]);
 
         // process photo upload
+        $fileObject = $request->file('photo');
+        $file_ext = $fileObject->extension();
+        $file_name = str_random(16) . '.' . $file_ext;
+        $path = $fileObject->storeAs('profile_photo', $file_name);
 
-        // insert the data into database
+        if ($path) {
+            $data = [
+                'email' => $request->input('email'),
+                'username' => $request->input('username'),
+                'password' => bcrypt($request->input('password')),
+                'photo' => $path,
+            ];
 
-        // registration complete
+            try {
+                // insert a row
+                /*$user = new User;
+                $user->email = $request->input('email');
+                $user->username = $request->input('username');
+                $user->password = bcrypt($request->input('password'));
+                $user->photo = $path;
+                $user->save();*/
+
+                User::create($data);
+
+                session()->flash('message', 'Registration successful');
+                return redirect('/');
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+
+        } else {
+            session()->flash('message', 'Photo was not uploaded for some reason!');
+            return redirect()->back();
+        }
     }
 
     public function viewLoginForm()

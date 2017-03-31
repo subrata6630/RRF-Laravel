@@ -69,6 +69,11 @@
     <div class="content">
         <div class="title m-b-md">
             Our First Laravel App
+            @if(session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
         </div>
     </div>
     <div class="links">
