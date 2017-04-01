@@ -54,11 +54,11 @@ class HomeController extends Controller
                 User::create($data);
 
                 session()->flash('message', 'Registration successful');
-                return redirect('/');
+                return redirect()->route('login');
             } catch (Exception $e) {
-                echo $e->getMessage();
+                session()->flash('message', $e->getMessage());
+                return redirect()->back();
             }
-
         } else {
             session()->flash('message', 'Photo was not uploaded for some reason!');
             return redirect()->back();

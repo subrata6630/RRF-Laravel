@@ -28,6 +28,21 @@
 
     <div class="jumbotron">
         <h1>RRF Laravel 101</h1>
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @elseif(session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+
         <form action='' method='post' enctype="multipart/form-data">
             <div class="form-group">
                 <label for='email'>Email Address: </label>
